@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price');
             $table->decimal('salePrice');
+            $table->boolean('isAvailable')->nullable();
             $table->timestamps();
         });
     }

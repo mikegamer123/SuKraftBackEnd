@@ -70,7 +70,7 @@ class PostController extends Controller
         }
         $model->updated_at = now()->toDateTimeString();
         $model->save();
-        return response()->json(["Comment ".$model->id. " updated successfully"]);
+        return response()->json(["Post ".$model->id. " updated successfully"]);
     }
 
     public function delete($id,Request $request){
@@ -80,7 +80,7 @@ class PostController extends Controller
 
         $comment = Comment::where('id',$id)->first();
         $comment->delete();
-        return "Deleted comment by id of ".$id;
+        return "Deleted Post by id of ".$id;
     }
     public function add(Request $request){
 //        if(!$this->declareAdmin($request)){

@@ -111,3 +111,16 @@ Route::prefix('likes')->group(function () {
     //api route for deleting followers by ID
     Route::delete('/delete/{id}', [App\Http\Controllers\LikeController::class, 'delete']);
 });
+////PRODUCTS
+Route::prefix('products')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\ProductController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\ProductController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\ProductController::class, 'add']);
+});
