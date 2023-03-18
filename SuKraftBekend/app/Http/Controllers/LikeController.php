@@ -36,18 +36,18 @@ class LikeController extends Controller
             $i = 0;
             foreach ($models as $model) {
                 $allModels[$i]["user"] = User::where("id", $model->userID)->first();
-                $allModels[$i]["seller"] = Seller::where("userID", $allModels[$i]["user"]->id)->first();
-                $allModels[$i]["post"] = Post::where("sellerID", $allModels[$i]["seller"]->id)->first();
-                $allModels[$i]["media"] = Media::where("id", $allModels[$i]["seller"]->userID)->first();
+                $allModels[$i]["seller"] = Seller::where("userID", $allModels[$i]["user"]->id ?? 0)->first();
+                $allModels[$i]["post"] = Post::where("sellerID", $allModels[$i]["seller"]->id ?? 0)->first();
+                $allModels[$i]["media"] = Media::where("id", $allModels[$i]["seller"]->userID ?? 0)->first();
                 $allModels[$i]["like"] = $model;
                 $i++;
             }
             return $allModels;
         } else {
             $model["like"] = Like::where('id', $id)->firstOrFail();
-            $model["user"] = User::where("id", $model['like']->userID)->first();
-            $model["seller"] = Seller::where("id", $model['like']->id)->first();
-            $model["media"] = Media::where('id', $model["seller"]->mediaID)->first();
+            $model["user"] = User::where("id", $model['like']->userID ?? 0)->first();
+            $model["seller"] = Seller::where("id", $model['like']->id ?? 0)->first();
+            $model["media"] = Media::where('id', $model["seller"]->mediaID ?? 0)->first();
             return $model;
         }
     }
