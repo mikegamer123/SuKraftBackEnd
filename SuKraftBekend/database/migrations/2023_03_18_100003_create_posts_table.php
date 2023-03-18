@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sellerID')->references('id')->on('sellers');
-            $table->foreignId('mediaID')->references('id')->on('media');
+            $table->foreignId('mediaID')->nullable()->references('id')->on('media');
             $table->text('description');
             $table->timestamps();
         });

@@ -18,7 +18,7 @@ class FollowerController extends Controller
 
     public function put(int $followerID,Request $request)
     {
-        $follower = Follower::with('user', 'seller')->where('id',$followerID)->firstOrFail();
+        $follower = Follower::with('user')->where('id',$followerID)->firstOrFail();
 
         if ($request->userID){
             $follower->userID = $request->userID;
@@ -33,7 +33,7 @@ class FollowerController extends Controller
 
     public function delete(int $followerID)
     {
-        $follower = Follower::with('user', 'seller')->where('id',$followerID)->firstOrFail();
+        $follower = Follower::with('user')->where('id',$followerID)->firstOrFail();
         $follower->delete();
         return "Deleted follower ".$follower->user->firstName." ".$follower->user->lastName." with id of ".$followerID;
     }

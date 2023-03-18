@@ -39,7 +39,7 @@ Route::prefix('users')->group(function () {
     Route::post('/put/{id}', [App\Http\Controllers\UserController::class, 'putUsers']);
 
     //api route for deleting users by ID
-    Route::get('/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteUsers']);
+    Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteUsers']);
 });
 ////IMAGES
 Route::prefix('media')->group(function () {
@@ -54,11 +54,12 @@ Route::prefix('categories')->group(function () {
     Route::post('/put/{id}', [App\Http\Controllers\CategoryController::class, 'put']);
 
     //api route for deleting categories by ID
-    Route::get('/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete']);
+    Route::delete('/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete']);
 
     //api route for creating categories
     Route::post('/create', [App\Http\Controllers\CategoryController::class, 'add']);
 });
+
 ///FOLLOWERS
 Route::prefix('followers')->group(function () {
     //api route for returning all followers or by ID
@@ -69,4 +70,32 @@ Route::prefix('followers')->group(function () {
 
     //api route for deleting followers by ID
     Route::delete('/delete/{id}', [App\Http\Controllers\FollowerController::class, 'delete']);
+});
+
+////COMMENTS
+Route::prefix('comments')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\CommentController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\CommentController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\CommentController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\CommentController::class, 'add']);
+});
+////POSTS
+Route::prefix('posts')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\PostController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\PostController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\PostController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\PostController::class, 'add']);
+
 });
