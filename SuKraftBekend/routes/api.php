@@ -29,3 +29,20 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
 });
 ///////////END OF PROTECTED ROUTES AUTH
+///
+////USERS
+Route::prefix('users')->group(function () {
+    //api route for returning all users or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\UserController::class, 'getUsers']);
+
+    //api route for updating user by ID
+    Route::post('/put/{id}', [App\Http\Controllers\UserController::class, 'putUsers']);
+
+    //api route for deleting users by ID
+    Route::get('/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteUsers']);
+});
+////IMAGES
+Route::prefix('media')->group(function () {
+    //api route for creating images for various types
+    Route::post('/{type}/{id}', [App\Http\Controllers\MediaController::class, 'mediaCreate']);
+});

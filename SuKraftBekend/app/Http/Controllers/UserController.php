@@ -16,7 +16,7 @@ class UserController extends Controller
 
         $token = $request->bearerToken();
         $user = User::where('api_token', $token)->firstOrFail();
-        if($user->userType == 'Admin'){
+        if($user->userType == 'admin'){
             return true;
         }
         else{
@@ -47,33 +47,36 @@ class UserController extends Controller
         }
     }
 
-//    public function putUsers($id,Request $request){
-////        if(!$this->declareAdmin($request)){
-////            return "Unathorized";
-////        }
-//
-//        $user = User::where('id',$id)->first();
-//
-//        if($request->firstName){
-//            $user->firstName = $request->firstName;
+    public function putUsers($id,Request $request){
+//        if(!$this->declareAdmin($request)){
+//            return "Unathorized";
 //        }
-//        if($request->lastName){
-//            $user->lastName = $request->lastName;
-//        }
-//        if($request->phoneNumber){
-//            $user->phoneNumber = $request->phoneNumber;
-//        }
-//        if($request->email){
-//            $user->email = $request->email;
-//        }
-//        if(isset($request->isBlocked)){
-//            $user->isBlocked = $request->isBlocked;
-//        }
-//
-//        $user->updated_at = now()->toDateTimeString();
-//        $user->save();
-//        return response()->json(["User ".$user->email. " updated successfully"]);
-//    }
+
+        $user = User::where('id',$id)->first();
+
+        if($request->firstName){
+            $user->firstName = $request->firstName;
+        }
+        if($request->lastName){
+            $user->lastName = $request->lastName;
+        }
+        if($request->username){
+            $user->username = $request->username;
+        }
+        if($request->phoneNo){
+            $user->phoneNo = $request->phoneNo;
+        }
+        if($request->email){
+            $user->email = $request->email;
+        }
+        if(isset($request->verified)){
+            $user->verified = $request->verified;
+        }
+
+        $user->updated_at = now()->toDateTimeString();
+        $user->save();
+        return response()->json(["User ".$user->email. " updated successfully"]);
+    }
 
     public function deleteUsers($id,Request $request){
         if(!$this->declareAdmin($request)){
