@@ -99,3 +99,15 @@ Route::prefix('posts')->group(function () {
     Route::post('/create', [App\Http\Controllers\PostController::class, 'add']);
 
 });
+
+///LIKES
+Route::prefix('likes')->group(function () {
+    //api route for returning all followers or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\LikeController::class, 'get']);
+
+    //api route for updating followers by ID
+    Route::post('/put/{id}', [App\Http\Controllers\LikeController::class, 'put']);
+
+    //api route for deleting followers by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\LikeController::class, 'delete']);
+});
