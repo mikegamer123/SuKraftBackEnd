@@ -2,65 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Seller;
+use App\Models\Product;
 use App\Models\Media;
 use App\Http\Requests\StoreMediaRequest;
 use App\Http\Requests\UpdateMediaRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function mediaCreate(Request $request, $type, $id)
     {
-        //
-    }
+        if ($request->hasFile('mediaUpload')) {
+            $request->validate(['mediaUpload' => 'mimes:jpg,jpeg,png,mp4|max:20000'], ['mediaUpload.*mimes' => 'Dozvoljeni formati su: jpg, jpeg, png, mp4.', 'mediaUpload.*max' => 'Velicina fajla je prevelika, max je 20MB']);
+            $path = Storage::disk('local')->put('/public', $request->file("mediaUpload"));
+            $split_path = explode("/", $path);
+            $typeOfMedia = explode(".", $split_path[1]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMediaRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Media $media)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Media $media)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMediaRequest $request, Media $media)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Media $media)
-    {
-        //
+            $image = Media::create([
+                'srcUrl' => "storage/" . $split_path[1],
+                'name' => $split_path[1],
+                'type' => $typeOfMedia == 'mp4' ? "video" : 'image',
+            ]);
+            $imgModel = null;
+            switch ($type) {
+                case 'posts':
+                    $imgModel = Post::where('id', $id)->first();
+                    $imgModel->mediaId = $image->id;
+                    $imgModel->save();
+                    break;
+                case 'users':
+                    $imgModel = User::where('id', $id)->first();
+                    $imgModel->mediaId = $image->id;
+                    $imgModel->save();
+                    break;
+                case 'sellers':
+                    $imgModel = Seller::where('id', $id)->first();
+                    $imgModel->mediaId = $image->id;
+                    $imgModel->save();
+                    break;
+                case 'products':
+                    $imgModel = Product::where('id', $id)->first();
+                    $imgModel->mediaId = $image->id;
+                    $imgModel->save();
+                    break;
+                default:
+                    return "not valid type for image";
+            }
+            return $image;
+        }
+        return "no file";
     }
 }
