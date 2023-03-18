@@ -59,3 +59,14 @@ Route::prefix('categories')->group(function () {
     //api route for creating categories
     Route::post('/create', [App\Http\Controllers\CategoryController::class, 'add']);
 });
+///FOLLOWERS
+Route::prefix('followers')->group(function () {
+    //api route for returning all followers or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\FollowerController::class, 'get']);
+
+    //api route for updating followers by ID
+    Route::post('/put/{id}', [App\Http\Controllers\FollowerController::class, 'put']);
+
+    //api route for deleting followers by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\FollowerController::class, 'delete']);
+});
