@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\Media;
 use App\Models\Messages;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Review;
@@ -37,5 +38,6 @@ class DatabaseSeeder extends Seeder
         Order::factory(3)->create();
         Product::factory(3)->create();
         Review::factory(3)->create();
+        OrderProduct::factory(3)->create();
     }
 }
