@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Media;
+use App\Models\Seller;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,12 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'sellerID'=>Seller::all()->random()->id,
+            'mediaID'=>Media::all()->random()->id,
+            'name'=>"product_".$this->faker->name,
+            'description'=>$this->faker->text,
+            'price'=>mt_rand (0*10, 10*10) / 10,
+            'salePrice'=>mt_rand (0*10, 10*10) / 10
         ];
     }
 }
