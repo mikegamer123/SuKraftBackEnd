@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Media;
+use App\Models\Seller;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'sellerID'=>Seller::all()->random()->id,
+            'mediaID'=>Media::all()->random()->id,
+            'description'=>$this->faker->text,
         ];
     }
 }
