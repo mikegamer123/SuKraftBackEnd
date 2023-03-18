@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Follower;
 use App\Models\Like;
@@ -14,6 +15,7 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Seller;
+use App\Models\SellerCategory;
 use App\Models\User;
 use Database\Factories\CommentFactory;
 use Database\Factories\MessagesFactory;
@@ -39,5 +41,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(3)->create();
         Review::factory(3)->create();
         OrderProduct::factory(3)->create();
+        Category::factory(3)->create();
+        SellerCategory::factory(3)->create();
     }
 }
