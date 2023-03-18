@@ -46,3 +46,16 @@ Route::prefix('media')->group(function () {
     //api route for creating images for various types
     Route::post('/{type}/{id}', [App\Http\Controllers\MediaController::class, 'mediaCreate']);
 });
+////CATEGORIES
+Route::prefix('categories')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\CategoryController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\CategoryController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::get('/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\CategoryController::class, 'add']);
+});
