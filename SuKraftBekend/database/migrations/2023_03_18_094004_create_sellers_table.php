@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('sellers', function (Blueprint $table) {
             $table->id();
-            $table->string('srcUrl');
-            $table->string('name');
-            $table->enum('type',['video','image']);
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('sellers');
     }
 };
