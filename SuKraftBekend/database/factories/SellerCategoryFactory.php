@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Seller;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,8 @@ class SellerCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'categoryID'=>Category::all()->random()->id,
+            'sellerID'=>Seller::all()->random()->id,
         ];
     }
 }
