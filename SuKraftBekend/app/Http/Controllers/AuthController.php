@@ -27,7 +27,7 @@ class AuthController extends Controller
             'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'phoneNumber' => 'required|string|max:255',
+            'phoneNo' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -46,10 +46,10 @@ class AuthController extends Controller
             'phoneNo' => $request->phoneNo,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'image_id' => 0,
+            'mediaId' => 0,
             'remember_token' => $emailToken,
-            'isBlocked' => false,
-            'userType' => $request->role ?? "user"
+            'verified' => false,
+            'role' => $request->role ?? "user"
         ]);
         //send registration email
         Mail::to($email)->queue(new \App\Mail\RegistrationMail($nameTo, $emailToken));

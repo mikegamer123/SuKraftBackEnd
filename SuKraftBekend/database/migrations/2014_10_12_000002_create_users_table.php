@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('username');
+            $table->string('api_token')->nullable();
             $table->string('phoneNo');
             $table->enum('role',['seller','admin','user',]);
             $table->boolean('verified');
-            $table->foreignId('mediaID')->references('id')->on('media');
+            $table->foreignId('mediaId')->references('id')->on('media');
             $table->string('email')->unique();
             $table->timestamp('emailVerifiedAt')->nullable();
             $table->string('password');
