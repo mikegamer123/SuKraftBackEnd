@@ -31,7 +31,7 @@ class MediaController extends Controller
             switch ($type) {
                 case 'posts':
                     $imgModel = Post::where('id', $id)->first();
-                    $imgModel->mediaId = $image->id;
+                    $imgModel->mediaID = $image->id;
                     $imgModel->save();
                     break;
                 case 'users':
@@ -41,12 +41,12 @@ class MediaController extends Controller
                     break;
                 case 'sellers':
                     $imgModel = Seller::where('id', $id)->first();
-                    $imgModel->mediaId = $image->id;
+                    $imgModel->mediaID = $image->id;
                     $imgModel->save();
                     break;
                 case 'products':
                     $imgModel = Product::where('id', $id)->first();
-                    $imgModel->mediaId = $image->id;
+                    $imgModel->mediaID = $image->id;
                     $imgModel->save();
                     break;
                 default:
