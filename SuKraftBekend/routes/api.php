@@ -130,3 +130,30 @@ Route::prefix('products')->group(function () {
     //api route for creating categories
     Route::post('/create', [App\Http\Controllers\ProductController::class, 'add']);
 });
+////REVIEWS
+Route::prefix('reviews')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\ReviewController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\ReviewController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\ReviewController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\ReviewController::class, 'add']);
+});
+////SELLER
+Route::prefix('sellers')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\SellerController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\SellerController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\SellerController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\SellerController::class, 'add']);
+});
+
