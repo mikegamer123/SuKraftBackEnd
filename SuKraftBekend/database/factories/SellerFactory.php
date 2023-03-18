@@ -20,8 +20,7 @@ class SellerFactory extends Factory
     {
         return [
             'userID'=>User::all()->random()->id,
-            'firstName'=> $this->faker->firstName(),
-            'lastName'=> $this->faker->lastName(),
+            'name'=> $this->faker->name(),
             'description'=> $this->faker->text(),
             'mediaID'=> Media::all()->random()->id,
             'brandColors'=> $this->faker->hexColor(),

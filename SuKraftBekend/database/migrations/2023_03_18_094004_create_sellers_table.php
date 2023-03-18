@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('userID')->references('id')->on('users');
             $table->foreignId('mediaID')->nullable()->references('id')->on('media');
-            $table->string('firstName');
-            $table->string('lastName');
+            $table->string('name');
             $table->string('brandColors');
             $table->string('phoneNo');
             $table->string('description');
