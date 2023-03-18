@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LikeController extends Controller
 {
@@ -50,4 +51,48 @@ class LikeController extends Controller
             return $model;
         }
     }
+
+    public function put($id, Request $request)
+    {
+//        if(!$this->declareAdmin($request)){
+//            return "Unathorized";
+//        }
+
+        $model = Like::where('id', $id)->first();
+
+        if ($request->userID) {
+            $model->userID = $request->userID;
+        }
+        if ($request->postID) {
+            $model->postID = $request->postID;
+        }
+
+        $model->updated_at = now()->toDateTimeString();
+        $model->save();
+        return response()->json(["Like " . $model->id . " updated successfully"]);
+    }
+
+    public function add(Request $request)
+    {
+        //        if(!$this->declareAdmin($request)){
+//            return "Unathorized";
+//        }
+
+        $validator = Validator::make($request->all(), [
+            'userID' => 'required',
+            'postID' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $model = Like::create([
+            'userId' => $request->userID,
+            'postId' => $request->postID,
+        ]);
+
+        return $model;
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Models\Follower;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FollowerController extends Controller
 {
@@ -69,5 +70,22 @@ class FollowerController extends Controller
         $follower = Follower::with('user')->where('id', $id)->firstOrFail();
         $follower->delete();
         return "Deleted follower " . $follower->user->firstName . " " . $follower->user->lastName . " with id of " . $id;
+    }
+
+    public function add(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userID' => 'required',
+            'sellerID' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+        $model = Follower::create([
+            'userId' => $request->userID,
+            'sellerID' => $request->sellerID,
+        ]);
+        return $model;
     }
 }

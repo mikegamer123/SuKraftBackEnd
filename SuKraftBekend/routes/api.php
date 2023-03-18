@@ -70,6 +70,9 @@ Route::prefix('followers')->group(function () {
 
     //api route for deleting followers by ID
     Route::delete('/delete/{id}', [App\Http\Controllers\FollowerController::class, 'delete']);
+
+    //api route for creating followers
+    Route::post('/create', [App\Http\Controllers\FollowerController::class, 'add']);
 });
 
 ////COMMENTS
@@ -110,6 +113,9 @@ Route::prefix('likes')->group(function () {
 
     //api route for deleting followers by ID
     Route::delete('/delete/{id}', [App\Http\Controllers\LikeController::class, 'delete']);
+
+    //api route for creating followers
+    Route::post('/create', [App\Http\Controllers\LikeController::class, 'add']);
 });
 ////PRODUCTS
 Route::prefix('products')->group(function () {
