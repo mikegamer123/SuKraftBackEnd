@@ -95,4 +95,15 @@ class LikeController extends Controller
         return $model;
     }
 
+    public function delete($id, Request $request)
+    {
+//        if(!$this->declareAdmin($request)){
+//            return "Unathorized";
+//        }
+
+        $comment = Like::where('id', $id)->first();
+        $comment->delete();
+        return "Deleted comment by id of " . $id;
+    }
+
 }
