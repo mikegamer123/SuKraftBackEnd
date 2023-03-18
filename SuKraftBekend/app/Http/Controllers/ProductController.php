@@ -90,11 +90,11 @@ class ProductController extends Controller
             $model->isAvailable = $request->isAvailable;
         }
         if ($request->categories) {
-            $modelDel =  ProductCategory::where('productID',$model->id)->get();
-            foreach ($modelDel as $delete){
+            $modelDel = ProductCategory::where('productID', $model->id)->get();
+            foreach ($modelDel as $delete) {
                 $delete->delete();
             }
-            foreach ($request->categories as $category){
+            foreach ($request->categories as $category) {
                 ProductCategory::create([
                     'categoryID' => $category,
                     'productID' => $model->id,
@@ -146,7 +146,7 @@ class ProductController extends Controller
         ]);
 
         if ($request->categories) {
-            foreach ($request->categories as $category){
+            foreach ($request->categories as $category) {
                 ProductCategory::create([
                     'categoryID' => $category,
                     'productID' => $model->id,

@@ -171,3 +171,17 @@ Route::prefix('sellers')->group(function () {
     Route::post('/create', [App\Http\Controllers\SellerController::class, 'add']);
 });
 
+////ORDER
+Route::prefix('orders')->group(function () {
+    //api route for returning all categories or by ID
+    Route::get('/get/{id?}', [App\Http\Controllers\OrderController::class, 'get']);
+    //api route for updating categories by ID
+    Route::post('/put/{id}', [App\Http\Controllers\OrderController::class, 'put']);
+
+    //api route for deleting categories by ID
+    Route::delete('/delete/{id}', [App\Http\Controllers\OrderController::class, 'delete']);
+
+    //api route for creating categories
+    Route::post('/create', [App\Http\Controllers\OrderController::class, 'add']);
+});
+
