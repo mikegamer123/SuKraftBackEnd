@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class MessagesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'userID'=>User::all()->random()->id,
+            'sellerID'=>Seller::all()->random()->id,
+            'text'=>$this->faker->text()
         ];
     }
 }
