@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('phoneNo');
             $table->enum('role',['seller','admin','user',]);
             $table->boolean('verified');
-            $table->foreignId('mediaId')->references('id')->on('media');
+            $table->foreignId('mediaId')->nullable()->references('id')->on('media');
             $table->string('email')->unique();
             $table->timestamp('emailVerifiedAt')->nullable();
             $table->string('password');

@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('userID')->references('id')->on('users');
             $table->foreignId('mediaID')->references('id')->on('media');
-            $table->string('name');
+            $table->string('firstName');
+            $table->string('lastName');
             $table->string('brandColors');
-            $table->string('phone');
+            $table->string('phoneNo');
             $table->string('description');
             $table->timestamps();
         });
