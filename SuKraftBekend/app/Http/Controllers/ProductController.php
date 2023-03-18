@@ -113,6 +113,16 @@ class ProductController extends Controller
 //        }
 
         $model = Product::where('id', $id)->first();
+        $modelDel = ProductCategory::where('productID', $model->id)->get();
+        foreach ($modelDel as $delete) {
+            $delete->delete();
+        }
+        foreach ($request->categories as $category) {
+            ProductCategory::create([
+                'categoryID' => $category,
+                'productID' => $model->id,
+            ]);
+        }
         $model->delete();
         return "Deleted Product by id of " . $id;
     }

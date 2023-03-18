@@ -88,11 +88,11 @@ class SellerController extends Controller
             $model->brandColors = $request->brandColors;
         }
         if ($request->categories) {
-            $modelDel =  SellerCategory::where('sellerID',$model->id)->get();
-            foreach ($modelDel as $delete){
+            $modelDel = SellerCategory::where('sellerID', $model->id)->get();
+            foreach ($modelDel as $delete) {
                 $delete->delete();
             }
-            foreach ($request->categories as $category){
+            foreach ($request->categories as $category) {
                 SellerCategory::create([
                     'categoryID' => $category,
                     'sellerID' => $model->id,
@@ -111,6 +111,16 @@ class SellerController extends Controller
 //        }
 
         $model = Seller::where('id', $id)->first();
+        $modelDel = SellerCategory::where('sellerID', $model->id)->get();
+        foreach ($modelDel as $delete) {
+            $delete->delete();
+        }
+        foreach ($request->categories as $category) {
+            SellerCategory::create([
+                'categoryID' => $category,
+                'sellerID' => $model->id,
+            ]);
+        }
         $model->delete();
         return "Deleted Seller by id of " . $id;
     }
@@ -142,7 +152,7 @@ class SellerController extends Controller
         ]);
 
         if ($request->categories) {
-            foreach ($request->categories as $category){
+            foreach ($request->categories as $category) {
                 SellerCategory::create([
                     'categoryID' => $category,
                     'sellerID' => $model->id,
